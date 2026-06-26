@@ -4,9 +4,135 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tequecoso Frontend</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f4f4;
+      color: #222;
+    }
+
+    header {
+      background: #c0392b;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      margin-bottom: 24px;
+    }
+
+    h1, h2 {
+      margin-bottom: 12px;
+    }
+
+    p {
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    form {
+      display: grid;
+      gap: 16px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    button {
+      background: #c0392b;
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #a93226;
+    }
+
+    .info {
+      background: #fff5f4;
+      border-left: 4px solid #c0392b;
+      padding: 16px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Tequecoso Frontend</h1>
-  <p>Avance inicial del frontend</p>
+  <header>
+    <h1>Tequecoso</h1>
+    <p>Módulo de gestión de clientes</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Registrar cliente</h2>
+      <p>Formulario inicial para el registro de clientes dentro del sistema Tequecoso.</p>
+
+      <form>
+        <div>
+          <label for="nombre">Nombre completo</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Ingrese nombre del cliente">
+        </div>
+
+        <div>
+          <label for="rut">RUT</label>
+          <input type="text" id="rut" name="rut" placeholder="Ingrese RUT del cliente">
+        </div>
+
+        <div>
+          <label for="telefono">Teléfono</label>
+          <input type="text" id="telefono" name="telefono" placeholder="Ingrese teléfono">
+        </div>
+
+        <div>
+          <label for="correo">Correo electrónico</label>
+          <input type="email" id="correo" name="correo" placeholder="Ingrese correo electrónico">
+        </div>
+
+        <div>
+          <label for="direccion">Dirección</label>
+          <input type="text" id="direccion" name="direccion" placeholder="Ingrese dirección">
+        </div>
+
+        <button type="submit">Guardar cliente</button>
+      </form>
+
+      <div class="info">
+        Este formulario representa el avance inicial del frontend para el proceso de registro de clientes.
+      </div>
+    </section>
+  </main>
 </body>
 </html>
