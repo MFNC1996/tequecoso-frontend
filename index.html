@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tequecoso Frontend</title>
   <style>
     * {
@@ -13,20 +13,43 @@
     }
 
     body {
-      background: #f4f4f4;
+      background: #f5f5f5;
       color: #222;
     }
 
     header {
       background: #c0392b;
       color: white;
-      padding: 20px;
+      padding: 24px;
       text-align: center;
     }
 
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      background: white;
+      color: #c0392b;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    nav button.active {
+      background: #922b21;
+      color: white;
+    }
+
     main {
-      max-width: 900px;
-      margin: 40px auto;
+      max-width: 950px;
+      margin: 30px auto;
       padding: 20px;
     }
 
@@ -35,11 +58,14 @@
       border-radius: 12px;
       padding: 24px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      margin-bottom: 24px;
     }
 
-    h1, h2 {
-      margin-bottom: 12px;
+    .hidden {
+      display: none;
+    }
+
+    h2 {
+      margin-bottom: 10px;
     }
 
     p {
@@ -49,90 +75,355 @@
 
     form {
       display: grid;
-      gap: 16px;
+      gap: 14px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
     }
 
     label {
+      display: block;
       font-weight: bold;
       margin-bottom: 6px;
-      display: block;
     }
 
-    input {
+    input, textarea, select {
       width: 100%;
       padding: 12px;
       border: 1px solid #ccc;
       border-radius: 8px;
-      font-size: 15px;
+      font-size: 14px;
     }
 
-    button {
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .submit-btn {
       background: #c0392b;
       color: white;
       border: none;
       padding: 14px;
       border-radius: 8px;
-      font-size: 16px;
       cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
     }
 
-    button:hover {
-      background: #a93226;
+    .submit-btn:hover {
+      background: #922b21;
     }
 
-    .info {
-      background: #fff5f4;
-      border-left: 4px solid #c0392b;
-      padding: 16px;
+    .message {
+      margin-top: 16px;
+      padding: 12px;
       border-radius: 8px;
-      margin-top: 20px;
+      font-weight: bold;
+      display: none;
+    }
+
+    .success {
+      background: #eafaf1;
+      color: #1e8449;
+      border: 1px solid #a9dfbf;
+    }
+
+    .error {
+      background: #fdecea;
+      color: #c0392b;
+      border: 1px solid #f5b7b1;
+    }
+
+    @media (max-width: 700px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Tequecoso</h1>
-    <p>Módulo de gestión de clientes</p>
+    <p>Frontend de gestión de clientes y proveedores</p>
+
+    <nav>
+      <button id="tabCliente" class="active" onclick="mostrarSeccion('cliente')">Clientes</button>
+      <button id="tabProveedor" onclick="mostrarSeccion('proveedor')">Proveedores</button>
+    </nav>
   </header>
 
   <main>
-    <section class="card">
+    <section id="seccionCliente" class="card">
       <h2>Registrar cliente</h2>
-      <p>Formulario inicial para el registro de clientes dentro del sistema Tequecoso.</p>
+      <p>Formulario conectado al endpoint de clientes del backend.</p>
 
-      <form>
-        <div>
-          <label for="nombre">Nombre completo</label>
-          <input type="text" id="nombre" name="nombre" placeholder="Ingrese nombre del cliente">
+      <form id="clienteForm">
+        <div class="grid">
+          <div>
+            <label for="businessName">Cliente / Razón social</label>
+            <input type="text" id="businessName" required />
+          </div>
+          <div>
+            <label for="clientRut">RUT</label>
+            <input type="number" id="clientRut" required />
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <label for="clientDv">DV</label>
+            <input type="text" id="clientDv" maxlength="1" required />
+          </div>
+          <div>
+            <label for="clientContact">Contacto</label>
+            <input type="text" id="clientContact" required />
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <label for="clientContactName">Nombre contacto</label>
+            <input type="text" id="clientContactName" />
+          </div>
+          <div>
+            <label for="clientEmail">Correo</label>
+            <input type="email" id="clientEmail" required />
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <label for="clientPhone">Teléfono</label>
+            <input type="text" id="clientPhone" />
+          </div>
+          <div>
+            <label for="clientPhoneSecondary">Teléfono secundario</label>
+            <input type="text" id="clientPhoneSecondary" />
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <label for="clientAddress">Dirección</label>
+            <input type="text" id="clientAddress" />
+          </div>
+          <div>
+            <label for="clientCity">Ciudad</label>
+            <input type="text" id="clientCity" />
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <label for="clientRegion">Región</label>
+            <input type="text" id="clientRegion" />
+          </div>
+          <div>
+            <label for="clientType">Tipo cliente</label>
+            <input type="text" id="clientType" />
+          </div>
         </div>
 
         <div>
-          <label for="rut">RUT</label>
-          <input type="text" id="rut" name="rut" placeholder="Ingrese RUT del cliente">
+          <label for="clientNotes">Observaciones</label>
+          <textarea id="clientNotes"></textarea>
         </div>
 
-        <div>
-          <label for="telefono">Teléfono</label>
-          <input type="text" id="telefono" name="telefono" placeholder="Ingrese teléfono">
-        </div>
-
-        <div>
-          <label for="correo">Correo electrónico</label>
-          <input type="email" id="correo" name="correo" placeholder="Ingrese correo electrónico">
-        </div>
-
-        <div>
-          <label for="direccion">Dirección</label>
-          <input type="text" id="direccion" name="direccion" placeholder="Ingrese dirección">
-        </div>
-
-        <button type="submit">Guardar cliente</button>
+        <button type="submit" class="submit-btn">Guardar cliente</button>
       </form>
 
-      <div class="info">
-        Este formulario representa el avance inicial del frontend para el proceso de registro de clientes.
-      </div>
+      <div id="clienteMessage" class="message"></div>
+    </section>
+
+    <section id="seccionProveedor" class="card hidden">
+      <h2>Registrar proveedor</h2>
+      <p>Formulario conectado al endpoint de proveedores del backend.</p>
+
+      <form id="proveedorForm">
+        <div class="grid">
+          <div>
+            <label for="proveedor">Proveedor / Razón social</label>
+            <input type="text" id="proveedor" required />
+          </div>
+          <div>
+            <label for="proveedorRut">RUT</label>
+            <input type="number" id="proveedorRut" required />
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <label for="proveedorDv">DV</label>
+            <input type="text" id="proveedorDv" maxlength="1" required />
+          </div>
+          <div>
+            <label for="proveedorContact">Contacto</label>
+            <input type="text" id="proveedorContact" required />
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <label for="proveedorContactName">Nombre contacto</label>
+            <input type="text" id="proveedorContactName" />
+          </div>
+          <div>
+            <label for="proveedorEmail">Correo</label>
+            <input type="email" id="proveedorEmail" required />
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <label for="proveedorPhone">Teléfono</label>
+            <input type="text" id="proveedorPhone" />
+          </div>
+          <div>
+            <label for="proveedorAddress">Dirección</label>
+            <input type="text" id="proveedorAddress" />
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <label for="proveedorCity">Ciudad</label>
+            <input type="text" id="proveedorCity" />
+          </div>
+          <div>
+            <label for="proveedorRegion">Región</label>
+            <input type="text" id="proveedorRegion" />
+          </div>
+        </div>
+
+        <div>
+          <label for="proveedorCategory">Rubro</label>
+          <input type="text" id="proveedorCategory" />
+        </div>
+
+        <div>
+          <label for="proveedorNotes">Observaciones</label>
+          <textarea id="proveedorNotes"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Guardar proveedor</button>
+      </form>
+
+      <div id="proveedorMessage" class="message"></div>
     </section>
   </main>
+
+  <script>
+    const API_BASE = "http://localhost:8080";
+
+    function mostrarSeccion(tipo) {
+      const cliente = document.getElementById("seccionCliente");
+      const proveedor = document.getElementById("seccionProveedor");
+      const tabCliente = document.getElementById("tabCliente");
+      const tabProveedor = document.getElementById("tabProveedor");
+
+      if (tipo === "cliente") {
+        cliente.classList.remove("hidden");
+        proveedor.classList.add("hidden");
+        tabCliente.classList.add("active");
+        tabProveedor.classList.remove("active");
+      } else {
+        proveedor.classList.remove("hidden");
+        cliente.classList.add("hidden");
+        tabProveedor.classList.add("active");
+        tabCliente.classList.remove("active");
+      }
+    }
+
+    function mostrarMensaje(id, texto, tipo) {
+      const box = document.getElementById(id);
+      box.style.display = "block";
+      box.className = "message " + tipo;
+      box.textContent = texto;
+    }
+
+    document.getElementById("clienteForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const data = {
+        businessName: document.getElementById("businessName").value,
+        rut: parseInt(document.getElementById("clientRut").value),
+        dv: document.getElementById("clientDv").value,
+        contact: document.getElementById("clientContact").value,
+        contactName: document.getElementById("clientContactName").value,
+        email: document.getElementById("clientEmail").value,
+        phone: document.getElementById("clientPhone").value,
+        phoneSecondary: document.getElementById("clientPhoneSecondary").value,
+        address: document.getElementById("clientAddress").value,
+        city: document.getElementById("clientCity").value,
+        region: document.getElementById("clientRegion").value,
+        type: document.getElementById("clientType").value,
+        active: true,
+        notes: document.getElementById("clientNotes").value
+      };
+
+      try {
+        const response = await fetch(`${API_BASE}/api/v1/client`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+          throw new Error("No se pudo registrar el cliente");
+        }
+
+        await response.json();
+        mostrarMensaje("clienteMessage", "Cliente registrado correctamente.", "success");
+        document.getElementById("clienteForm").reset();
+      } catch (error) {
+        mostrarMensaje("clienteMessage", "Error al registrar cliente. Revisa backend o CORS.", "error");
+      }
+    });
+
+    document.getElementById("proveedorForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const data = {
+        proveedor: document.getElementById("proveedor").value,
+        rut: parseInt(document.getElementById("proveedorRut").value),
+        dv: document.getElementById("proveedorDv").value,
+        contact: document.getElementById("proveedorContact").value,
+        contactName: document.getElementById("proveedorContactName").value,
+        email: document.getElementById("proveedorEmail").value,
+        phone: document.getElementById("proveedorPhone").value,
+        address: document.getElementById("proveedorAddress").value,
+        city: document.getElementById("proveedorCity").value,
+        region: document.getElementById("proveedorRegion").value,
+        category: document.getElementById("proveedorCategory").value,
+        notes: document.getElementById("proveedorNotes").value
+      };
+
+      try {
+        const response = await fetch(`${API_BASE}/api/proveedores`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+          throw new Error("No se pudo registrar el proveedor");
+        }
+
+        await response.json();
+        mostrarMensaje("proveedorMessage", "Proveedor registrado correctamente.", "success");
+        document.getElementById("proveedorForm").reset();
+      } catch (error) {
+        mostrarMensaje("proveedorMessage", "Error al registrar proveedor. Revisa backend o CORS.", "error");
+      }
+    });
+  </script>
 </body>
 </html>
