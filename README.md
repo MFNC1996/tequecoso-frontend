@@ -1,12 +1,14 @@
 # Tequecoso Frontend
 
-Frontend del proyecto **Tequecoso**, desarrollado como parte del Servicio Disciplinar CED.  
-Este repositorio contiene la interfaz web inicial para la gestión de clientes y proveedores, conectada mediante `fetch()` a los servicios web REST desarrollados en Spring Boot [file:24][file:7].
+Frontend del proyecto **Tequecoso**, desarrollado como parte del Servicio Disciplinar CED.
+
+Este repositorio contiene la interfaz web inicial para la gestión de clientes y proveedores, conectada al backend mediante servicios web REST construidos con Spring Boot.
 
 ## Descripción
 
-La aplicación permite registrar clientes y proveedores desde una interfaz web simple, pensada como MVP del sistema.  
-Su objetivo es apoyar la digitalización básica del negocio, reemplazando parte del registro manual por formularios conectados al backend [file:7][file:24].
+La aplicación permite registrar clientes y proveedores desde una interfaz web simple, pensada como MVP del sistema.
+
+Su objetivo es apoyar la digitalización básica del negocio, reemplazando parte del registro manual por formularios conectados al backend.
 
 ## Funcionalidades actuales
 
@@ -14,29 +16,30 @@ Su objetivo es apoyar la digitalización básica del negocio, reemplazando parte
 - Registro de proveedores mediante formulario.
 - Navegación simple entre módulo de clientes y proveedores.
 - Envío de datos al backend usando `fetch()` y JSON.
-- Mensajes visuales de éxito o error al intentar guardar información [query].
+- Mensajes visuales de éxito o error al intentar guardar información.
 
 ## Endpoints utilizados
 
-El frontend está preparado para conectarse a estos endpoints del backend:
+El frontend está preparado para conectarse a estos endpoints del backend.
 
 ### Clientes
+
 - `GET /api/v1/client`
 - `POST /api/v1/client`
 - `PUT /api/v1/client/{id}`
 - `DELETE /api/v1/client/{id}`
 
 ### Proveedores
+
 - `GET /api/proveedores`
 - `POST /api/proveedores`
 - `PUT /api/proveedores/{id}`
 - `DELETE /api/proveedores/{id}`
 
-Estas rutas fueron definidas a partir de los controladores del backend compartidos durante el desarrollo [query].
-
 ## Campos principales manejados
 
 ### Cliente
+
 - `businessName`
 - `rut`
 - `dv`
@@ -53,6 +56,7 @@ Estas rutas fueron definidas a partir de los controladores del backend compartid
 - `notes`
 
 ### Proveedor
+
 - `proveedor`
 - `rut`
 - `dv`
@@ -66,8 +70,6 @@ Estas rutas fueron definidas a partir de los controladores del backend compartid
 - `category`
 - `notes`
 
-Los nombres de los campos se alinearon con los modelos Java del backend para facilitar el mapeo automático de JSON con Spring Boot [query].
-
 ## Estructura del proyecto
 
 ```text
@@ -76,7 +78,7 @@ tequecoso-frontend/
 └── README.md
 ```
 
-En esta primera versión se trabajó en un archivo HTML único con CSS y JavaScript integrados, para acelerar el desarrollo del MVP y facilitar la evidencia de avance para la evaluación [file:7].
+En esta primera versión se trabajó en un archivo HTML único con CSS y JavaScript integrados, para acelerar el desarrollo del MVP.
 
 ## Tecnologías utilizadas
 
@@ -84,56 +86,60 @@ En esta primera versión se trabajó en un archivo HTML único con CSS y JavaScr
 - CSS3
 - JavaScript
 - Fetch API
-- Spring Boot REST API (backend relacionado) [file:24]
+- Spring Boot REST API
 
 ## Ejecución local
 
 1. Clonar este repositorio:
+
 ```bash
 git clone https://github.com/TU-USUARIO/tequecoso-frontend.git
 ```
 
-2. Entrar a la carpeta:
+2. Entrar a la carpeta del proyecto:
+
 ```bash
 cd tequecoso-frontend
 ```
 
 3. Abrir `index.html` en el navegador.
 
-## Requisito importante
+## Configuración de conexión
 
-Para que el registro funcione correctamente, el backend debe estar levantado localmente.  
-Actualmente el frontend usa como base:
+Actualmente el frontend usa la siguiente base para conectarse al backend:
 
 ```js
 const API_BASE = "http://localhost:8080";
 ```
 
-Si el backend corre en otro puerto o ruta base, esa constante debe ajustarse [query].
+Si el backend corre en otro puerto o ruta base, esta constante debe modificarse en el archivo `index.html`.
 
 ## Posibles problemas
 
 ### Error de CORS
-Si el frontend está abierto desde un origen distinto al backend, el navegador puede bloquear las peticiones por política CORS.  
-Ese comportamiento es común cuando frontend y backend corren en distintos puertos, y en Spring Boot se resuelve habilitando CORS en el controlador o en la configuración global [web:455][web:486].
+
+Si el frontend y el backend están corriendo en orígenes distintos, el navegador puede bloquear las peticiones.  
+En ese caso, se debe habilitar CORS en la configuración del backend con Spring Boot.
 
 ### Backend apagado
-Si Spring Boot no está corriendo, el formulario mostrará mensajes de error al intentar registrar clientes o proveedores [query].
 
-## Objetivo académico
+Si el backend no está en ejecución, el formulario mostrará un mensaje de error al intentar registrar clientes o proveedores.
 
-Este frontend forma parte del proyecto de curso orientado a:
-- gestionar clientes y proveedores,
-- apoyar el control administrativo básico,
-- integrarse con servicios web,
-- y aportar evidencia funcional para la evaluación del ramo [file:7][file:24].
+## Objetivo del módulo
+
+Este frontend forma parte del proyecto general Tequecoso y busca apoyar la gestión administrativa básica del negocio mediante:
+
+- registro de clientes,
+- registro de proveedores,
+- integración con backend,
+- avance funcional para evaluación académica.
 
 ## Estado del proyecto
 
-En desarrollo.  
-Versión inicial del MVP enfocada en formularios de registro e integración básica con backend [file:7].
+En desarrollo.
 
-## Relación con el proyecto principal
+Versión inicial del MVP enfocada en formularios de registro e integración básica con backend.
 
-Este repositorio corresponde al módulo frontend del proyecto general Tequecoso.  
-El repositorio principal del curso centraliza documentación, BPMN, evidencias, actas y enlaces a los distintos componentes del sistema [file:24].
+## Autor
+
+Repositorio frontend desarrollado para el proyecto **Tequecoso** en el contexto del Servicio Disciplinar CED.
